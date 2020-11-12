@@ -36,10 +36,11 @@ class PrototypesController < ApplicationController
       prototype = Prototype.find(params[:id])
       prototype.update(prototype_params)
       # 更新が成功した時、詳細ページへ遷移
-      if prototype.update(prototype_params)
+      if prototype.save
         redirect_to prototype_path(prototype.id)
       # 更新が失敗した時、編集ページへ遷移
       else
+        @prototype = Prototype.find(params[:id])
         render :edit
       end
     end
